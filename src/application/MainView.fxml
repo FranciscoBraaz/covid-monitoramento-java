@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.chart.CategoryAxis?>
+<?import javafx.scene.chart.LineChart?>
+<?import javafx.scene.chart.NumberAxis?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.Menu?>
+<?import javafx.scene.control.MenuBar?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.SeparatorMenuItem?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.MainController">
+   <top>
+      <MenuBar minHeight="-Infinity" minWidth="500.0" prefWidth="600.0" BorderPane.alignment="CENTER">
+        <menus>
+          <Menu mnemonicParsing="false" text="File">
+            <items>
+                  <MenuItem fx:id="btnFileOpen" mnemonicParsing="false" onAction="#btnFileOpenOnAction" text="Open" />
+                  <SeparatorMenuItem mnemonicParsing="false" />
+              <MenuItem fx:id="btnClose" mnemonicParsing="false" onAction="#btnCloseOnAction" text="Close" />
+            </items>
+          </Menu>
+        </menus>
+      </MenuBar>
+   </top>
+   <center>
+      <HBox minHeight="300.0" prefHeight="400.0" prefWidth="600.0" BorderPane.alignment="CENTER">
+         <children>
+            <LineChart fx:id="lineChart">
+              <xAxis>
+                <CategoryAxis fx:id="axisMonth" animated="false" side="BOTTOM" />
+              </xAxis>
+              <yAxis>
+                <NumberAxis fx:id="axisValues" animated="false" side="LEFT" />
+              </yAxis>
+            </LineChart>
+         </children>
+      </HBox>
+   </center>
+   <left>
+      <ListView fx:id="listView" onMouseClicked="#listViewOnClick" prefHeight="400.0" prefWidth="177.0" BorderPane.alignment="CENTER" />
+   </left>
+</BorderPane>
