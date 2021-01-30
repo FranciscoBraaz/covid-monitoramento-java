@@ -13,7 +13,7 @@
 
 <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.MainController">
    <top>
-      <MenuBar minHeight="-Infinity" minWidth="500.0" prefWidth="600.0" BorderPane.alignment="CENTER">
+      <MenuBar minHeight="-Infinity" minWidth="500.0" prefWidth="777.0" BorderPane.alignment="CENTER">
         <menus>
           <Menu mnemonicParsing="false" text="File">
             <items>
@@ -26,9 +26,9 @@
       </MenuBar>
    </top>
    <center>
-      <HBox minHeight="300.0" prefHeight="400.0" prefWidth="600.0" BorderPane.alignment="CENTER">
+      <HBox minHeight="400.0" prefHeight="450.0" prefWidth="600.0" BorderPane.alignment="CENTER">
          <children>
-            <LineChart fx:id="lineChart">
+            <LineChart fx:id="lineChart" prefHeight="450.0" prefWidth="545.0">
               <xAxis>
                 <CategoryAxis fx:id="axisMonth" animated="false" side="BOTTOM" />
               </xAxis>

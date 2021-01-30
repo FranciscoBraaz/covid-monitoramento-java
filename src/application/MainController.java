@@ -20,6 +20,7 @@ import java.util.Map;
 public class MainController {
 	
 	Map<String, List<Integer>> infirmaryList = new LinkedHashMap<>();
+	Map<String, List<Integer>> icuList = new LinkedHashMap<>();
 
     @FXML
     private MenuItem btnFileOpen;
@@ -49,6 +50,7 @@ public class MainController {
     	FileChooser filechooser = new FileChooser();
     	File selectedFile = filechooser.showOpenDialog(null);
     	infirmaryList = Infirmary.parseListInfirmary(selectedFile);
+    	icuList = Icu.parseListIcu(selectedFile);
     	String months [] = infirmaryList.keySet().toArray(new String[0]);
     	listView.getItems().clear();
     	for(String month: months) {
@@ -57,33 +59,54 @@ public class MainController {
     }
 
     @SuppressWarnings({ "unchecked" })
+    
 	@FXML
     void listViewOnClick(MouseEvent event) {
     	lineChart.getData().clear();
     	String month = listView.getSelectionModel().getSelectedItem();
-    	List<Integer> data = infirmaryList.get(month);
-    	Integer rol [] = data.toArray(new Integer[0]);
+    	List<Integer> dataInfirmary = infirmaryList.get(month);
+    	List<Integer> dataIcu = icuList.get(month);
+    	Integer rolInfirmary [] = dataInfirmary.toArray(new Integer[0]);
+    	Integer rolIcu [] = dataIcu.toArray(new Integer[0]);
     	
-    	for(int i = 0; i < rol.length / 2; i++){
-    	    int temp = rol[i];
-    	    rol[i] = rol[rol.length - i - 1];
-    	    rol[rol.length - i - 1] = temp;
+    	for(int i = 0; i < rolInfirmary.length / 2; i++){
+    	    int temp = rolInfirmary[i];
+    	    rolInfirmary[i] = rolInfirmary[rolInfirmary.length - i - 1];
+    	    rolInfirmary[rolInfirmary.length - i - 1] = temp;
+    	}
+    	
+    	for(int i = 0; i < rolIcu.length / 2; i++){
+    	    int temp = rolIcu[i];
+    	    rolIcu[i] = rolIcu[rolIcu.length - i - 1];
+    	    rolIcu[rolIcu.length - i - 1] = temp;
     	}
 
     	//Make List to save your XYChartSeries
     	@SuppressWarnings("rawtypes")
-		List<XYChart.Series> seriesList = new ArrayList<>();
+		List<XYChart.Series> seriesListInfirmary = new ArrayList<>();
+    	List<XYChart.Series> seriesListIcu = new ArrayList<>();
     	
     	@SuppressWarnings("rawtypes")
-		XYChart.Series series = new XYChart.Series();
-    	series.setName(month);
+		XYChart.Series seriesInfirmary = new XYChart.Series();
+    	XYChart.Series seriesIcu = new XYChart.Series();
+    	seriesInfirmary.setName("Enfermaria");
+    	seriesIcu.setName("UTI");
+    	
+    	lineChart.getXAxis().setLabel("Dias");
+    	lineChart.getYAxis().setLabel("Porcentagem de ocupação");
     	
     	//Iterate over your Data
-    	for (int i = 0; i<rol.length; i++) {
-    	     series.getData().add(new XYChart.Data<String, Integer>(String.format("%d", i+1), rol[i]));
-    	  seriesList.add(series);
+    	for (int i = 0; i<rolInfirmary.length; i++) {
+    		seriesInfirmary.getData().add(new XYChart.Data<String, Integer>(String.format("%d", i+1), rolInfirmary[i]));
+    		seriesListInfirmary.add(seriesInfirmary);
     	}
-    	lineChart.getData().add(seriesList.get(seriesList.size() - 1));
+    	lineChart.getData().add(seriesListInfirmary.get(seriesListInfirmary.size() - 1));
+    	
+    	for (int i = 0; i<rolIcu.length; i++) {
+    		seriesIcu.getData().add(new XYChart.Data<String, Integer>(String.format("%d", i+1), rolIcu[i]));
+    		seriesListIcu.add(seriesIcu);
+	   	}
+    	lineChart.getData().add(seriesListIcu.get(seriesListIcu.size() - 1));
     }
 
 }

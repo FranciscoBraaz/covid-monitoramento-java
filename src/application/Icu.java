@@ -1,32 +1,30 @@
 package application;
 
-
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
-//import java.util.Locale;
 import java.util.Map;
 import java.util.Scanner;
 
-public class Infirmary {
+public class Icu {
 	
-	public Infirmary() {
+	public Icu() {
 	}
 	
-	public static Map<String, List<Integer>> parseListInfirmary (File f) {
+	public static Map<String, List<Integer>> parseListIcu (File f) {
 		Map<String, List<Integer>> dictionary = new LinkedHashMap<>();
-		Scanner sc2;
+		Scanner sc;
 		try {
-			sc2 = new Scanner(f);
-			while(sc2.hasNext()) {
-				String line = sc2.nextLine();
+			sc = new Scanner(f);
+			while(sc.hasNext()) {
+				String line = sc.nextLine();
 				try {
 					Reader i = new Reader(line);
-					int iBeds = i.infirmaryBeds;
-					int iSUS = i.infirmarySUS; 
-					int iPrivate = i.infirmaryPrivate;
+					int iBeds = i.icuBeds;
+					int iSUS = i.icuSUS; 
+					int iPrivate = i.icuPrivate;
 					if(dictionary.containsKey(i.date.toUpperCase())) {
 						dictionary.get(i.date.toUpperCase()).add(percentageOccupation(iBeds, iSUS, iPrivate));
 					} else {
@@ -37,7 +35,7 @@ public class Infirmary {
 				catch(Exception e) {
 				}
 			}	
-			sc2.close();
+			sc.close();
 		} catch(FileNotFoundException e) {
 			System.out.println("Arquivo não encontrado!");
 		} 
@@ -54,4 +52,5 @@ public class Infirmary {
 		
 		return value;
 	}
+
 }
