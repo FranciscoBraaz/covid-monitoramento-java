@@ -22,14 +22,11 @@ public class Icu {
 				String line = sc.nextLine();
 				try {
 					Reader i = new Reader(line);
-					int iBeds = i.icuBeds;
-					int iSUS = i.icuSUS; 
-					int iPrivate = i.icuPrivate;
 					if(dictionary.containsKey(i.date.toUpperCase())) {
-						dictionary.get(i.date.toUpperCase()).add(percentageOccupation(iBeds, iSUS, iPrivate));
+						dictionary.get(i.date.toUpperCase()).add(percentageOccupation(i.icuBeds, i.icuSUS, i.icuPrivate));
 					} else {
 						dictionary.put(i.date.toUpperCase(), new ArrayList<Integer>());
-						dictionary.get(i.date.toUpperCase()).add(percentageOccupation(iBeds, iSUS, iPrivate));
+						dictionary.get(i.date.toUpperCase()).add(percentageOccupation(i.icuBeds, i.icuSUS, i.icuPrivate));
 					}
 				} 
 				catch(Exception e) {
@@ -39,11 +36,7 @@ public class Icu {
 		} catch(FileNotFoundException e) {
 			System.out.println("Arquivo não encontrado!");
 		} 
-		
-//		for (Entry<String, List<Integer>> pair : dictionary.entrySet()) {
-//		    System.out.println(pair.getKey());
-//		    System.out.println(pair.getValue());
-//		}
+	
 		return dictionary;
 	}
 	

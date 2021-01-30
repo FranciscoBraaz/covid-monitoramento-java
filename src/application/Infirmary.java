@@ -24,14 +24,11 @@ public class Infirmary {
 				String line = sc2.nextLine();
 				try {
 					Reader i = new Reader(line);
-					int iBeds = i.infirmaryBeds;
-					int iSUS = i.infirmarySUS; 
-					int iPrivate = i.infirmaryPrivate;
 					if(dictionary.containsKey(i.date.toUpperCase())) {
-						dictionary.get(i.date.toUpperCase()).add(percentageOccupation(iBeds, iSUS, iPrivate));
+						dictionary.get(i.date.toUpperCase()).add(percentageOccupation(i.infirmaryBeds, i.infirmarySUS, i.infirmaryPrivate));
 					} else {
 						dictionary.put(i.date.toUpperCase(), new ArrayList<Integer>());
-						dictionary.get(i.date.toUpperCase()).add(percentageOccupation(iBeds, iSUS, iPrivate));
+						dictionary.get(i.date.toUpperCase()).add(percentageOccupation(i.infirmaryBeds, i.infirmarySUS, i.infirmaryPrivate));
 					}
 				} 
 				catch(Exception e) {

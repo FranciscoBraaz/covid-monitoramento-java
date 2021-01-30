@@ -57,8 +57,6 @@ public class MainController {
     		listView.getItems().add(month);
     	}
     }
-
-    @SuppressWarnings({ "unchecked" })
     
 	@FXML
     void listViewOnClick(MouseEvent event) {
@@ -69,25 +67,18 @@ public class MainController {
     	Integer rolInfirmary [] = dataInfirmary.toArray(new Integer[0]);
     	Integer rolIcu [] = dataIcu.toArray(new Integer[0]);
     	
-    	for(int i = 0; i < rolInfirmary.length / 2; i++){
-    	    int temp = rolInfirmary[i];
-    	    rolInfirmary[i] = rolInfirmary[rolInfirmary.length - i - 1];
-    	    rolInfirmary[rolInfirmary.length - i - 1] = temp;
-    	}
-    	
-    	for(int i = 0; i < rolIcu.length / 2; i++){
-    	    int temp = rolIcu[i];
-    	    rolIcu[i] = rolIcu[rolIcu.length - i - 1];
-    	    rolIcu[rolIcu.length - i - 1] = temp;
-    	}
+    	reverseRol(rolInfirmary);
+    	reverseRol(rolIcu);
 
     	//Make List to save your XYChartSeries
     	@SuppressWarnings("rawtypes")
 		List<XYChart.Series> seriesListInfirmary = new ArrayList<>();
+    	@SuppressWarnings("rawtypes")
     	List<XYChart.Series> seriesListIcu = new ArrayList<>();
     	
     	@SuppressWarnings("rawtypes")
 		XYChart.Series seriesInfirmary = new XYChart.Series();
+    	@SuppressWarnings("rawtypes")
     	XYChart.Series seriesIcu = new XYChart.Series();
     	seriesInfirmary.setName("Enfermaria");
     	seriesIcu.setName("UTI");
@@ -95,19 +86,27 @@ public class MainController {
     	lineChart.getXAxis().setLabel("Dias");
     	lineChart.getYAxis().setLabel("Porcentagem de ocupação");
     	
-    	//Iterate over your Data
-    	for (int i = 0; i<rolInfirmary.length; i++) {
-    		seriesInfirmary.getData().add(new XYChart.Data<String, Integer>(String.format("%d", i+1), rolInfirmary[i]));
-    		seriesListInfirmary.add(seriesInfirmary);
-    	}
-    	lineChart.getData().add(seriesListInfirmary.get(seriesListInfirmary.size() - 1));
+    	createData(lineChart, seriesListInfirmary, seriesInfirmary, rolInfirmary);
+    	createData(lineChart, seriesListIcu, seriesIcu, rolIcu);
     	
-    	for (int i = 0; i<rolIcu.length; i++) {
-    		seriesIcu.getData().add(new XYChart.Data<String, Integer>(String.format("%d", i+1), rolIcu[i]));
-    		seriesListIcu.add(seriesIcu);
-	   	}
-    	lineChart.getData().add(seriesListIcu.get(seriesListIcu.size() - 1));
-    }
+}
 
+    public static void reverseRol(Integer[] rol) {
+    	for(int i = 0; i < rol.length / 2; i++){
+    	    int temp = rol[i];
+    	    rol[i] = rol[rol.length - i - 1];
+    	    rol[rol.length - i - 1] = temp;
+    	} 
+    }
+    
+    @SuppressWarnings({ "rawtypes", "unchecked" })
+	public static void createData(LineChart<String, Integer> lineChart, List<XYChart.Series> listData, XYChart.Series seriesData, Integer[] rol) {
+    	for (int i = 0; i<rol.length; i++) {
+    		seriesData.getData().add(new XYChart.Data<String, Integer>(String.format("%d", i+1), rol[i]));
+    		listData.add(seriesData);
+    	}
+    	lineChart.getData().add(listData.get(listData.size() - 1));
+    }
+    
 }
 
