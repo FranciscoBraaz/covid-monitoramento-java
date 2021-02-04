@@ -8,6 +8,9 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
+/**
+ * Classe responsável por iniciar a Scene principal 
+ */
 public class Main extends Application {
 	@Override
 	public void start(Stage primaryStage) {
@@ -16,7 +19,7 @@ public class Main extends Application {
 			Parent parent = loader.load();
 			Scene mainScene = new Scene(parent);
 			primaryStage.setScene(mainScene);
-			primaryStage.setTitle("Sample JavaFX application");
+			primaryStage.setTitle("Covid-Monitoramento");
 			primaryStage.show();
 		} catch (IOException e) {
 			e.printStackTrace();
