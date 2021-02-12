@@ -22,4 +22,4 @@ Esse programa foi desenvolvido na disciplina de POO . Ele é responsável por pe
 	- 3-) Utilizanod o LibreOffice Calc
 		- Arquivo -> Salvar como -> Na opção "Tipo" escolha: Texto CSV (*csv) -> Na caixinha "Exportar o arquivo de texto",  coloque um ponto e vírgula ( ; ) na opção 'Delimitador de campo'. 
 	
-- Agora, já com o arquivo CSV em mãos, inicie o programa e clique em File e depois em Open. Selecione o arquivo no formato CSV e clique sobre o mês que deseja exibir as informações. Será mostrado o gráfico de linhas que apresentada a porcentagem de ocupação nas enfermarias e nas UTIs. Se desejar visualizar o gráfico de pizza, clique na opção 'Pizza' no canto superior direito e escolha o dia do mês para exibir o respectivo gráfico.
+- Agora, já com o arquivo CSV em mãos, inicie o programa e clique em File e depois em Open. Selecione o arquivo no formato CSV e clique sobre o mês que deseja exibir as informações. Será mostrado o gráfico de linhas que apresenta a porcentagem de ocupação nas enfermarias e nas UTIs. Se desejar visualizar o gráfico de pizza, clique na opção 'Pizza' no canto superior direito e escolha o dia do mês para exibir o respectivo gráfico.
